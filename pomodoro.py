@@ -85,7 +85,7 @@ def delete_task(task_id: str):
             return {"message": "Task deleted ."}
     raise HTTPException(status_code=404, detail="Task not found.")
 
-@app.post("/pomodoro", response_model=PomodoroSession)
+@app.post("/pomodoro/{task_id}", response_model=PomodoroSession)
 def create_pomodoro_session(task_id: int):
     if not any(task["id"] == task_id for task in tasks):
         raise HTTPException(status_code=404, detail="Task not found.")
