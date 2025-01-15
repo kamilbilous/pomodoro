@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 app = FastAPI()
 
 class Task(BaseModel):
-    id: str
+    id: int
     title: str = Field(..., min_length=3, max_length=100)
     description: Optional[str] = Field(None, max_length=300)
     status: str = Field(default= "TODO", pattern =r"^(TODO|IN_PROGRESS|DONE)$")
@@ -16,7 +16,7 @@ class TaskCreate(BaseModel):
     description: Optional[str] = Field(None, max_length=300)
 
 class PomodoroSession(BaseModel):
-    task_id: str
+    task_id: int
     start_time: datetime
     end_time: datetime
     completed: bool
@@ -38,7 +38,9 @@ pomodoro_sessions = [
 "completed": True,
 }
 ]
-@app.route('/')
+@app.get("/")
+def root():
+    return {"message": "Welcome to the Task and Pomodoro API"}
 @app.post("/tasks", response_model=Task)
 def create_task(task: TaskCreate):
     if any(t["title"] == task.title for t in tasks):
