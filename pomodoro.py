@@ -10,7 +10,7 @@ class Task(BaseModel):
     id: str
     title: str = Field(..., min_length=3, max_length=100)
     description: Optional[str] = Field(None, max_length=300)
-    status: str = Field(default= "TODO", regex ="^(TODO|IN_PROGRESS|DONE)$")
+    status: str = Field(default= "TODO", pattern =r"^(TODO|IN_PROGRESS|DONE)$")
 
 class TaskCreate(BaseModel):
     title: str = Field(..., min_length=3, max_length=100)
