@@ -24,6 +24,7 @@ class PomodoroSession(BaseModel):
 
 tasks: Dict[str, Task] = {}
 pomodoro_sessions: List[PomodoroSession] = []
+@app.route('/')
 @app.post("/tasks", response_model=Task)
 def create_task(task: TaskCreate):
     if any(t.title == task.title for t in task.values()):
