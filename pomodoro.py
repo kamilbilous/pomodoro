@@ -22,8 +22,23 @@ class PomodoroSession(BaseModel):
     end_time: datetime
     completed: bool
 
-tasks: Dict[str, Task] = {}
-pomodoro_sessions: List[PomodoroSession] = []
+tasks = [
+{
+"id": 1,
+"title": "Nauka FastAPI",
+"description": "Przygotować przykładowe API z dokumentacją",
+"status": "TODO",
+}
+]
+# Tablica dla timerów Pomodoro
+pomodoro_sessions = [
+{
+"task_id": 1,
+"start_time": "2025-01-09T12:00:00",
+"end_time": "2025-01-09T12:25:00",
+"completed": True,
+}
+]
 @app.route('/')
 @app.post("/tasks", response_model=Task)
 def create_task(task: TaskCreate):
